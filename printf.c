@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:08 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:24:52 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@ static int	ft_putchar(char c)
 	return (1);
 }
 
+static int	ft_putstr(char *s)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+		count++;
+	}
+	return (count);
+}
+
 static int	ft_filter(char const *str, int i, va_list	*args)
 {
 	int	count;
@@ -26,6 +42,8 @@ static int	ft_filter(char const *str, int i, va_list	*args)
 	count = 0;
 	if (str[i] == 'c')
 		count += ft_putchar(va_arg(*args, int));
+	if (str[i] == 's')
+		count += ft_putstr(va_arg(*args, char *));
 	return (count);
 }
 
@@ -55,9 +73,9 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	char	c;
+	char	*s;
 
-	c = 'a';
-	ft_printf("%c", c);
+	s = "hola";
+	ft_printf("%s", s);
 	return (0);
 }
