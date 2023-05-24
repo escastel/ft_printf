@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/24 09:56:06 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:21:28 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_count_nb(int nb)
 {
 	int	count;
 
-	count = 0;
+	count = 1;
 	while (nb >= 10)
 	{
 		nb /= 10;
@@ -48,6 +48,8 @@ static int	ft_count_nb(int nb)
 
 static int	ft_putnbr(int nb)
 {
+	int	count;
+
 	if (nb == -2147483648)
 	{
 		write(1, "-2", 2);
@@ -57,6 +59,7 @@ static int	ft_putnbr(int nb)
 	{
 		write (1, "-", 1);
 		nb *= -1;
+		count = 1;
 	}
 	if (nb >= 0 && nb <= 9)
 	{
@@ -68,7 +71,7 @@ static int	ft_putnbr(int nb)
 		ft_putnbr(nb / 10);
 		ft_putnbr(nb % 10);
 	}
-	return (ft_count_nb(nb));
+	return (ft_count_nb(nb) + count);
 }
 
 static int	ft_filter(char const *str, int i, va_list	*args)
@@ -82,6 +85,10 @@ static int	ft_filter(char const *str, int i, va_list	*args)
 		count += ft_putstr(va_arg(*args, char *));
 	if (str[i] == 'd')
 		count += ft_putnbr(va_arg(*args, int));
+	if (str[i] == 'i')
+		count += ft_putnbr(va_arg(*args, int));
+	/*if (str[i] == 'u')
+		count += ft_putunsignbr(va_arg(*args, int));*/
 	return (count);
 }
 
