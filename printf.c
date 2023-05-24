@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/24 17:24:36 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:28:51 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,17 @@ static int	t_filter(char const *str, int i, va_list	*args)
 	if (str[i] == 's')
 		count += ft_putstr(va_arg(*args, char *));
 	if (str[i] == 'p')
-		count += ft_putptr(va_arg(*args, void *));
+		count += ft_putptr(va_arg(*args, unsigned long long));
 	if (str[i] == 'd')
 		count += ft_putnbr(va_arg(*args, int));
 	if (str[i] == 'i')
 		count += ft_putnbr(va_arg(*args, int));
 	if (str[i] == 'u')
 		count += ft_putunsignbr(va_arg(*args, unsigned int));
+	if (str[i] == 'x')
+		count += ft_puthexa(nb, 'x');
+	if (str[i] == 'X')
+		count += ft_puthexa(nb, 'X');
 	if (str[i] == '%')
 		count += ft_putchar('%');
 	return (count);
