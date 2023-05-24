@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/24 11:37:29 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:24:36 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,35 @@ static int	ft_putstr(char *s)
 		i++;
 	}
 	return (i);
+}
+
+static int	ft_puthexa(unsigned long long nb, char c)
+{
+	char	hexa;
+	int		count;
+
+	if (nb < 16)
+	{
+		if (c == 'X')
+			ft_putchar("0123456789ABCDEF"[nb % 16]);
+			count++;
+		if (c == 'x')
+			ft_putchar("0123456789abcdef"[nb % 16]);
+			count++;
+	}
+	else
+		ft_puthexa(nb / 16);
+	return (count);
+}
+
+static	int	ft_putptr(unsigned long long ptr)
+{
+	int	count;
+
+	count = 0;
+	count += ft_putchar("0x");
+	count += ft_puthexa(ptr, 'x');
+	return (count);
 }
 
 static int	ft_count_nb(int nb)
@@ -73,7 +102,7 @@ static int	ft_putnbr(int nb)
 	return (ft_count_nb(nb) + count);
 }
 
-static unsigned ft_putunsignbr(unsigned int nb)
+static int	ft_putunsignbr(unsigned int nb)
 {
 	if (nb >= 0 && nb <= 9)
 	{
@@ -88,7 +117,7 @@ static unsigned ft_putunsignbr(unsigned int nb)
 	return (ft_count_nb(nb));
 }
 
-static int ft_filter(char const *str, int i, va_list	*args)
+static int	t_filter(char const *str, int i, va_list	*args)
 {
 	int	count;
 
@@ -97,12 +126,16 @@ static int ft_filter(char const *str, int i, va_list	*args)
 		count += ft_putchar(va_arg(*args, int));
 	if (str[i] == 's')
 		count += ft_putstr(va_arg(*args, char *));
+	if (str[i] == 'p')
+		count += ft_putptr(va_arg(*args, void *));
 	if (str[i] == 'd')
 		count += ft_putnbr(va_arg(*args, int));
 	if (str[i] == 'i')
 		count += ft_putnbr(va_arg(*args, int));
 	if (str[i] == 'u')
 		count += ft_putunsignbr(va_arg(*args, unsigned int));
+	if (str[i] == '%')
+		count += ft_putchar('%');
 	return (count);
 }
 
@@ -132,9 +165,11 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	unsigned int	d;
+	char	d;
+	char	*i;
 
-	d = 4294967295;
-	ft_printf("%u", d);
+	d = 'a';
+	i = &d;
+	ft_printf("%p", i);
 	return (0);
 }
