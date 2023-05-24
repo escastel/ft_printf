@@ -6,13 +6,12 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/24 10:21:28 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:37:29 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static int	ft_putchar(char c)
 {
@@ -74,7 +73,22 @@ static int	ft_putnbr(int nb)
 	return (ft_count_nb(nb) + count);
 }
 
-static int	ft_filter(char const *str, int i, va_list	*args)
+static unsigned ft_putunsignbr(unsigned int nb)
+{
+	if (nb >= 0 && nb <= 9)
+	{
+		nb += '0';
+		write(1, &nb, 1);
+	}
+	else
+	{
+		ft_putunsignbr(nb / 10);
+		ft_putunsignbr(nb % 10);
+	}
+	return (ft_count_nb(nb));
+}
+
+static int ft_filter(char const *str, int i, va_list	*args)
 {
 	int	count;
 
@@ -87,8 +101,8 @@ static int	ft_filter(char const *str, int i, va_list	*args)
 		count += ft_putnbr(va_arg(*args, int));
 	if (str[i] == 'i')
 		count += ft_putnbr(va_arg(*args, int));
-	/*if (str[i] == 'u')
-		count += ft_putunsignbr(va_arg(*args, int));*/
+	if (str[i] == 'u')
+		count += ft_putunsignbr(va_arg(*args, unsigned int));
 	return (count);
 }
 
@@ -118,9 +132,9 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	int	d;
+	unsigned int	d;
 
-	d = -2147483648;
-	ft_printf("%d", d);
+	d = 4294967295;
+	ft_printf("%u", d);
 	return (0);
 }
