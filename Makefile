@@ -5,6 +5,7 @@ ft_putchar.c \
 ft_putstr.c \
 ft_count_nb.c \
 ft_putnbr.c \
+ft_count_unsignb.c \
 ft_putunsignbr.c \
 ft_puthexa.c \
 ft_putptr.c

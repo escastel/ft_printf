@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_count_unsignb.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 10:46:05 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/25 13:58:15 by escastel         ###   ########.fr       */
+/*   Created: 2023/05/25 13:53:01 by escastel          #+#    #+#             */
+/*   Updated: 2023/05/25 14:10:08 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdarg.h>
-# include <unistd.h>
+#include "ft_printf.h"
 
-int	ft_printf(char const *str, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_count_nb(int nb);
-int	ft_putnbr(int nb);
-int	ft_count_unsignb(unsigned int nb);
-int	ft_putunsignbr(unsigned int nb);
-int	ft_puthexa(unsigned long long nb, char c);
-int	ft_putptr(unsigned long long ptr);
+int	ft_count_unsignb(unsigned int nb)
+{
+	int	count;
 
-#endif
+	count = 0;
+	if (nb <= -1)
+		count += 1;
+	while (nb >= 10)
+	{
+		nb /= 10;
+		count++;
+	}
+	return (count);
+}
