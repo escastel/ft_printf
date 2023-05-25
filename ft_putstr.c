@@ -6,27 +6,26 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:02:09 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/25 12:29:55 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:49:10 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!s)
 	{
 		write (1, "(null)", 6);
 		return (6);
 	}
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		write(1, &s[i], 1);
 		i++;
 	}
 	return (i);
 }
- 
