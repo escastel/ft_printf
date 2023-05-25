@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:02:54 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/25 11:05:37 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:53:17 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 int	ft_puthexa(unsigned long long nb, char c)
 {
-	int		count;
+	int	count;
 
 	count = 0;
-	if (nb < 16)
-	{
-		if (c == 'X')
-			ft_putchar("0123456789ABCDEF"[nb % 16]);
-			count++;
-		if (c == 'x')
-			ft_putchar("0123456789abcdef"[nb % 16]);
-			count++;
-	}
-	else
-		ft_puthexa(nb / 16, 'x');
+	if (nb >= 16)
+		count += ft_puthexa(nb / 16, c);
+	if (c == 'X')
+		ft_putchar("0123456789ABCDEF"[nb % 16]);
+	if (c == 'x')
+		ft_putchar("0123456789abcdef"[nb % 16]);
+	count++;
 	return (count);
 }
