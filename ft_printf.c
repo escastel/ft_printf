@@ -6,7 +6,7 @@
 /*   By: escastel <escastel@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:16:16 by escastel          #+#    #+#             */
-/*   Updated: 2023/05/25 12:57:29 by escastel         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:23:04 by escastel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,3 @@ int	ft_printf(char const *str, ...)
 	va_end(args);
 	return (count);
 }
-
-/*int	main(void)
-{
-	int	a;
-
-	a = -2147483648;
-	ft_printf("%d", a);
-	return (0);
-}*/
